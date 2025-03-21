@@ -7,6 +7,7 @@ import eye from "../imges/eye.svg"
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import { useNavigate } from 'react-router-dom'
+import "../styles/Projects.css"
 
 function Projects() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ function Projects() {
           <h1 className='font-black text-3xl'>Проекты</h1>
           <span className='ml-2 mt-3'>113</span>
         </div>
-        <button className='ml-96 text-white text-2xl flex gap-2 bg-purple-500 p-2 text-center' style={{borderRadius:"12px"}} onClick={() => navigate("/project/add/step1")}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
+        <button className='add ml-96' style={{borderRadius:"12px"}} onClick={() => navigate("/project/add/step1")}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
       </div>
       <div className='flex'>
           <div className='flex gap-3'>

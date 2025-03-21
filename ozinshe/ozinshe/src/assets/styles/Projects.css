@@ -1,0 +1,16 @@
+.add{
+    background-color: #7E2DFC;
+    width: 120px;
+    height: 36px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 16px;
+font-weight: 700;
+font-size: 14px;
+line-height: 24px;
+letter-spacing: -0.2px;
+color: white;
+}
