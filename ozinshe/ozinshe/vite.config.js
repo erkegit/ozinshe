@@ -8,12 +8,5 @@ export default defineConfig({
    port: 3039,
    host:"0.0.0.0",
    open:true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3039', // URL вашего API
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
   },
 })

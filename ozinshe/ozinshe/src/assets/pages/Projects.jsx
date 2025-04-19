@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Helmet } from 'react-helmet'
 import arrdown from "../imges/arrdown.svg"
+import clock from "../imges/clock.svg"
 import img from "../imges/image.png"
 import eye from "../imges/eye.svg"
 import trash from "../imges/trash.svg"
@@ -47,7 +48,7 @@ function Projects() {
           </div>
          <div className=''>
          <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
-              <img src="" alt="" />
+              <img src={clock} alt="" />
               <h1 className='font-black font-mono'>Выберите год</h1>
           </div>
          </div>
