@@ -1,0 +1,23 @@
+.pading{
+    padding: 16px 48px 16px 24px;
+}
+
+
+
+.text{
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    width: 178px;
+}
+
+@media (max-width: 420px) {
+    .text{
+        display: none;
+        position: absolute;
+    }
+    
+}

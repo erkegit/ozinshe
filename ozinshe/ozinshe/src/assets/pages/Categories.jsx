@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import camera from "../imges/camera.svg"
+import "../styles/Projects.css"
+import plus from "../imges/plus.svg"
 //import arrdown from "../imges/arrdown.svg"
 
 function Categories() {
@@ -66,11 +68,11 @@ function Categories() {
         <title>Категори</title>
       </Helmet>
         <div className='flex gap-96'>
-        <div className='flex gap-3'>
+          <div className="flex mr-20">
           <h1 className='font-black text-lg w-max'>Категори</h1>
           <span className='mt-2'>10</span>
-        </div>
-        <button className='ml-96 text-white text-2xl flex gap-2 bg-purple-500 p-2 text-center ' style={{borderRadius:"12px"}} onClick={openModal1}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
+          </div>
+          <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
         <div className='block p-5 w-72 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <h1 className='font-black font-mono'>Мультфилмы</h1>
@@ -95,7 +97,7 @@ function Categories() {
             className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
           >
             <div className='flex gap-56 space-x-2'>
-            <h3 className="font-bold font-mono mb-4">Удалить проект?</h3>
+            <h3 className="font-bold font-mono mb-4">Удалить категорию?</h3>
             <h3 className='rotate-45 text-2xl' onClick={closeModal}>+</h3>
             </div>
             <hr />

@@ -8,6 +8,7 @@ import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import { useNavigate } from 'react-router-dom'
 import "../styles/Projects.css"
+import plus from "../imges/plus.svg"
 
 function Projects() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +22,13 @@ function Projects() {
         <title>Проекты</title>
       </Helmet>
       <div className='flex gap-96'>
-        <div className='flex'>
+        <div className='flex mr-10'>
           <h1 className='font-black text-3xl'>Проекты</h1>
           <span className='ml-2 mt-3'>113</span>
         </div>
-        <button className='add ml-96' style={{borderRadius:"12px"}} onClick={() => navigate("/project/add/step1")}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
+        <button className='add ml-96' onClick={() => navigate("/project/add/step1")}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
-      <div className='flex'>
+      <div className='flex gap-72'>
           <div className='flex gap-3'>
             <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <h2 className='text-gray-500'>Сортировка:</h2>
@@ -45,7 +46,7 @@ function Projects() {
               <img src={arrdown} alt="" />
             </div>
           </div>
-         <div className='absolute right-6'>
+         <div className=''>
          <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <img src={clock} alt="" />
               <h1 className='font-black font-mono'>Выберите год</h1>

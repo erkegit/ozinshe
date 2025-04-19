@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { Helmet } from 'react-helmet';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
+import "../styles/Projects.css"
+import plus from "../imges/plus.svg"
 
 function Roles() {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,11 +99,11 @@ function Roles() {
         <title>Роли</title>
       </Helmet>
        <div className='flex gap-96'>
-        <div className='flex'>
+        <div className='flex mr-20'>
           <h1 className='font-black text-3xl'>Роли</h1>
           <span className='ml-2 mt-3'>3</span>
         </div>
-        <button className='ml-96 text-white text-2xl flex gap-2 bg-purple-500 p-2 text-center' style={{borderRadius:"12px"}} onClick={openModal1}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
+        <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
     <div className='block p-5 w-535 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
             <h1 className='font-black font-mono text-2xl'>Менеджер 1</h1>

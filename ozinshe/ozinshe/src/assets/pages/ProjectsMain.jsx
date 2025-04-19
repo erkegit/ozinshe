@@ -4,6 +4,8 @@ import img from "../imges/image2.png"
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import upolad from "../imges/upolad.jpg"
+import "../styles/Projects.css"
+import plus from "../imges/plus.svg"
 
 function ProjectsMain() {
   const [image, setImage] = useState("");
@@ -98,16 +100,16 @@ function ProjectsMain() {
   );
   
   return (
-    <div className='p-5 bg-gray-200 rounded-2xl'>
+    <div className='p-5 bg-gray-100 rounded-2xl'>
       <Helmet>
         <title>Проекты на главной</title>
       </Helmet>
         <div className='flex gap-96'>
-        <div className='flex gap-3'>
+        <div className='flex gap-1 mr-20'>
           <h1 className='font-black text-lg w-max'>Проекты на главной</h1>
           <span className='mt-2'>2</span>
         </div>
-        <button className='ml-96 text-white text-2xl flex gap-2 bg-purple-500 p-2 text-center' style={{borderRadius:"12px"}} onClick={openModal1}><h2 className='text-2xl'>+</h2><h1>Добавить</h1></button>
+        <button className='add ml-80' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
          <div className='block p-5 w-506 bg-white h-96 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <img src={img} alt="" className='w-506 h-60'/>

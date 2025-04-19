@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../imges/Your App.svg'
+import eye from "../imges/eye.svg"
+import heye from "../imges/heye.svg"
 
 function Register(){
   const navigate = useNavigate();
@@ -16,9 +19,13 @@ function Register(){
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-
-      <div className="w-84 max-w-sm p-7 bg-white rounded-3xl">
+    <div className="block p-16 justify-items-center bg-white">
+      <img src={logo} alt="" className='mb-16' onClick={() => navigate("/project")}/>
+      <div className="w-84 max-w-sm p-7 bg-white"
+            style={
+              {borderRadius:"48px", boxShadow:"80px 120px 504px 0px rgba(0, 0, 0, 0.16)"}
+            }
+      >
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
           Добро пожаловать
         </h2>
@@ -53,7 +60,12 @@ function Register(){
                 className="absolute inset-y-0 right-0 px-3 text-gray-500 focus:outline-none"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                👁️ {/* Eye icon placeholder */}
+                {showPassword ? (
+                  <img src={heye} alt="Hide" className="w-4 h-4" />
+                ) : (
+                  <img src={eye} alt="Show" className="w-4 h-4" />
+                )}
+                
               </button>
             </div>
           </div>

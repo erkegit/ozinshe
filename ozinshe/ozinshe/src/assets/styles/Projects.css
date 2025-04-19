@@ -2,15 +2,29 @@
     background-color: #7E2DFC;
     width: 120px;
     height: 36px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    padding: 8px 16px;
+    gap: 8px;
     border-radius: 16px;
-font-weight: 700;
-font-size: 14px;
-line-height: 24px;
-letter-spacing: -0.2px;
-color: white;
 }
+
+.add > h1{
+    color: var(--White-W100, #FFF);
+font-family: "Roboto", sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 171.429% */
+letter-spacing: -0.2px;
+}
+
+/* .add > h2{
+    color: var(--White-W100, #FFF);
+    margin-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+
+} */
