@@ -14,7 +14,7 @@ function Projects() {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => setIsOpen(false)
   const navigate = useNavigate()
   return (
     <div className='p-6 bg-gray-100 block space-y-10' style={{borderRadius:"20px"}}>
