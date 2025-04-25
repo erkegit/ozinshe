@@ -129,7 +129,7 @@ function Categories() {
             </div>
             <hr />
             <div className='mt-5'>
-              {renderInput("Название проекта", "category", "text", 96)}
+              {renderInput("Название категори", "category", "text", 96)}
             </div>
             <div className='ml-20 space-x-5 mt-5'>
               <button className={`rounded-xl bg-purple-700 text-center

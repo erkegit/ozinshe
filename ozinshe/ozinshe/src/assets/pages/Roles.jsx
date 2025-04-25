@@ -168,8 +168,8 @@ function Roles() {
             onClick={(e) => e.stopPropagation()}
             className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
           >
-            <div className='flex gap-28 space-x-2'>
-            <h3 className="font-bold font-mono mb-4 w-max">Добавить проекта на главной</h3>
+            <div className='flex gap-56 space-x-2'>
+            <h3 className="font-bold font-mono mb-4 w-max">Добавить роль</h3>
             <h3 className='rotate-45 text-2xl' onClick={closeModal1}>+</h3>
             </div>
             <hr />

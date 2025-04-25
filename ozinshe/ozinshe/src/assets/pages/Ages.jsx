@@ -16,10 +16,21 @@ import close from "../imges/icon.svg"
 
 // bg-gradient-to-br to-purple-500 from-green-500 
 function Ages() {
-  const fileInputRef = useRef(null);
+  const [ages, setAges] = useState([
+    {id: 1, views:21, img:avatar1, name: '8-10',},
+    {id: 2, views:21, img:avatar2, name: '10-12',},
+    {id: 3, views:21, img:avatar3, name: '12-14',},
+    {id: 4, views:21, img:avatar4, name: '14-16',},
+    {id: 5, views:21, img:avatar5, name: '16-18'},
+  ])
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
-
+  const openModal = () => setIsOpen(true);
+  const closeModal = (id) => {
+    setIsOpen(false);
+    setAges(ages.filter((age) => age.id !== id))
+  }
+const fileInputRef = useRef(null);
   const openModal1 = () => setIsOpen1(true);
   const closeModal1 = () => {
     setIsOpen1(false);
@@ -36,19 +47,7 @@ function Ages() {
     img: "",
   })
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = (id) => {
-    setIsOpen(false);
-    setAges(ages.filter((age) => age.id !== id))
-  }
-
-  const [ages, setAges] = useState([
-    {id: 1, views:21, img:avatar1, name: '8-10',},
-    {id: 2, views:21, img:avatar2, name: '10-12',},
-    {id: 3, views:21, img:avatar3, name: '12-14',},
-    {id: 4, views:21, img:avatar4, name: '14-16',},
-    {id: 5, views:21, img:avatar5, name: '16-18'},
-  ])
+  
 
   const [image, setImage] = useState(null);
   const handleDrop = (e) => {
@@ -107,7 +106,7 @@ function Ages() {
 
 
   const isValue = Object.values(values).every((value) => value && value.trim() !== '');
-  const isCompleted = isValue & image
+  const isCompleted = isValue || image
 
   const renderInput = (label, field, type, w, h) => (
     <div className="relative w-64 mt-8">
@@ -202,7 +201,7 @@ return (
             onClick={(e) => e.stopPropagation()}
             className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
           >
-            <div className='flex justify-items-center gap-28 space-x-2'>
+            <div className='flex justify-items-center gap-56 space-x-2'>
             <h3 className="font-bold font-mono  w-max">Добавить возраст</h3>
             <img className='' src={close} alt="" onClick={closeModal1}/>
             </div>
@@ -239,7 +238,7 @@ return (
             >
               <h1 className='mr-3 ml-3 mt-1 mb-1 text-white'>Добавить</h1>
             </button>
-              <button className=' rounded-xl bg-gray-200 text-center' onClick={() => {closeModal1(); }}>
+              <button className=' rounded-xl bg-gray-200 text-center' onClick={() => {closeModal1();    setValues({age: '', img: ''}); }}>
                 <h1 className='mr-5 ml-4 mt-1 mb-1 text-black'>Отмена</h1>
               </button>
             </div>
