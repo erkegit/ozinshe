@@ -77,7 +77,7 @@ function Categories() {
       </div>
         <div className='block p-5 w-72 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <h1 className='font-black font-mono'>Мультфилмы</h1>
-        <div className='flex gap-24'>
+        <div className='flex gap-20'>
           <div className='flex gap-1 mt-8'>
             <img src={camera} alt="" className='w-4 h-4 mt-1'/>
             Число проектов

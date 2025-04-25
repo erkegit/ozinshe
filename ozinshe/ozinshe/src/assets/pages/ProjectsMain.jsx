@@ -140,7 +140,7 @@ function ProjectsMain() {
             <img src={close} alt='' className='' onClick={() => closeModal()}/>
             </div>
             <hr />
-              <p className='text-center'>Вы уверены, что хотите удалить этот проект из главного?</p>
+              <p className='text-center text-gray-400'>Вы уверены, что хотите удалить этот проект из главного?</p>
             <div className='ml-20 space-x-5 mt-5'>
               <button className=' rounded-xl bg-purple-700 text-center' onClick={() => alert("Для удаление потребуется API от проектов")}>
                 <h1 className='mr-3 ml-3 mt-1 mb-1 text-white'>Да, удалить</h1>
