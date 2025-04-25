@@ -34,17 +34,17 @@ function Projects() {
             <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <h2 className='text-gray-500'>Сортировка:</h2>
               <h1 className='font-black font-mono'>Популярные</h1>
-              <img src={arrdown} alt="" />
+              <img src={arrdown} alt="" className='w-3 h-6'/>
             </div>
             <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <h2 className='text-gray-500'>Категория:</h2>
               <h1 className='font-black font-mono'>Все категори</h1>
-              <img src={arrdown} alt="" />
+              <img src={arrdown} alt="" className='w-3 h-6'/>
             </div>
             <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <h2 className='text-gray-500'>Тип:</h2>
               <h1 className='font-black font-mono'>Фильм и Сериалы</h1>
-              <img src={arrdown} alt="" />
+              <img src={arrdown} alt="" className='w-3 h-6'/>
             </div>
           </div>
          <div className=''>
