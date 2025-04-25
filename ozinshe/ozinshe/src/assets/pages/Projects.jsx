@@ -30,7 +30,7 @@ function Projects() {
         <button className='add ml-96' onClick={() => navigate("/project/add/step1")}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
       <div className='flex gap-72'>
-          <div className='flex gap-3'>
+          <div className='flex gap-3 flex-wrap'>
             <div className='flex p-1 gap-3 bg-gray-200' style={{borderRadius:"12px"}}>
               <h2 className='text-gray-500'>Сортировка:</h2>
               <h1 className='font-black font-mono'>Популярные</h1>
