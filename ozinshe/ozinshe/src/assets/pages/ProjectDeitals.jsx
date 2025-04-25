@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import clock from "../imges/Clock.svg"
 import eye from "../imges/eye.svg"
-import star from "../imges/star.svg"
-import share from "../imges/share.svg"
-import video from "../imges/video.png"
+import star from "../imges/star.svg";
+import share from "../imges/share.svg";
+import video from "../imges/Video.png";
 import { Skeleton } from '@mui/material'
 import subtitles from "../imges/subtitles.svg"
 import clpbrd from "../imges/clapper-board.svg"
-import img from "../imges/image.jpg"
+import img from "../imges/Image.jpg"
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 function ProjectDeitals() {

@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { Helmet } from 'react-helmet'
 import arrdown from "../imges/arrdown.svg"
-import clock from "../imges/Clock.svg"
-import img from "../imges/image.png"
-import eye from "../imges/eye.svg"
+import clock from "../imges/Clock.svg";
+import img from "../imges/Image1.png";
+import eye from "../imges/eye.svg";
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import { useNavigate } from 'react-router-dom'
