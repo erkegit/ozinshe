@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import arrdown from "../imges/arrdown.svg"
 import smile from "../imges/smile.jpg"
 import pen from "../imges/edit.svg"
+import close from "../imges/icon.svg"
 
 function Users() {
     const [isOpen, setIsOpen] = useState(false);
@@ -65,9 +66,9 @@ function Users() {
             onClick={(e) => e.stopPropagation()}
             className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
           >
-            <div className='flex gap-56 space-x-2'>
+            <div className='flex gap-52 space-x-2'>
             <h3 className="font-bold font-mono mb-4">Даные Пользвателя</h3>
-            <h3 className='rotate-45 text-2xl' onClick={closeModal}>+</h3>
+            <img src={close} alt='' className='' onClick={() => closeModal()}/>
             </div>
             <hr />
             <div className='justify-items-center'>
