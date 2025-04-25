@@ -8,13 +8,8 @@ import App from './App.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <SpeedInsights
-        // projectId="speed-insights"
-        // clientId="speed-insights"
-        // clientSecret="speed-insights"
-      >
-        <App />
-      </SpeedInsights>
+    <SpeedInsights/>
+      <App />
     </BrowserRouter>
   </StrictMode>,
 )
