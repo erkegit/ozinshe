@@ -159,7 +159,7 @@ return (
      </div>
      <div className='flex gap-5'>
          <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
-         <img src={trash} alt="" className='w-4 h-4 ' onClick={() => openModal}/>
+         <img src={trash} alt="" className='w-4 h-4 ' onClick={() => openModal()}/>
      </div>
    </div>
 </div>
@@ -177,7 +177,7 @@ return (
           >
             <div className='flex gap-56 space-x-2 mb-4'>
             <h3 className="font-bold font-mono">Удалить возраст?</h3>
-            <img src={close} alt='' className='' onClick={closeModal()}/>
+            <img src={close} alt='' className='' onClick={() => closeModal()}/>
             </div>
             <hr/>
               <p className='text-center text-gray-400'>Вы действительно хотите удалить возраст?</p>

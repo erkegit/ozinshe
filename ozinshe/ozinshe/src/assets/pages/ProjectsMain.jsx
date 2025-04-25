@@ -4,6 +4,7 @@ import img from "../imges/image2.png"
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import upolad from "../imges/upolad.jpg"
+import close from "../imges/icon.svg"
 import "../styles/Projects.css"
 import plus from "../imges/plus.svg"
 
@@ -136,7 +137,7 @@ function ProjectsMain() {
           >
             <div className='flex gap-56 space-x-2'>
             <h3 className="font-bold font-mono mb-4">Удалить проект?</h3>
-            <h3 className='rotate-45 text-2xl' onClick={closeModal}>+</h3>
+            <img src={close} alt='' className='' onClick={() => closeModal()}/>
             </div>
             <hr />
               <p className='text-center'>Вы уверены, что хотите удалить этот проект из главного?</p>

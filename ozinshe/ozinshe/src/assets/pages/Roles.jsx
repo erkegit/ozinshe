@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Helmet } from 'react-helmet';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
+import close from "../imges/icon.svg"
 import "../styles/Projects.css"
 import plus from "../imges/plus.svg"
 
@@ -136,25 +137,25 @@ function Roles() {
           onClick={closeModal}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
-          >
-            <div className='flex gap-56 space-x-2'>
-            <h3 className="font-bold font-mono mb-4">Удалить проект?</h3>
-            <h3 className='rotate-45 text-2xl' onClick={closeModal}>+</h3>
-            </div>
-            <hr />
-              <p className='text-center'>Вы уверены, что хотите удалить этот роль?</p>
-            <div className='ml-20 space-x-5 mt-5'>
-              <button className=' rounded-xl bg-purple-700 text-center' onClick={() => alert("Для удаление потребуется API от проектов")}>
-                <h1 className='mr-3 ml-3 mt-1 mb-1 text-white'>Да, удалить</h1>
-              </button>
-              <button className=' rounded-xl bg-gray-200 text-center' onClick={closeModal}>
-                <h1 className='mr-5 ml-4 mt-1 mb-1 text-black'>Отмена</h1>
-              </button>
-            </div>
-          </div>
+         <div
+                 onClick={(e) => e.stopPropagation()}
+                 className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full"
+               >
+                 <div className='flex gap-56 space-x-2 mb-4'>
+                 <h3 className="font-bold font-mono">Удалить жанр?</h3>
+                 <img src={close} alt='' className='' onClick={() => closeModal()}/>
+                 </div>
+                 <hr/>
+                   <p className='text-center text-gray-400'>Вы действительно хотите удалить жанр?</p>
+                 <div className='ml-20 space-x-5 mt-5'>
+                   <button className=' rounded-2xl text-white bg-purple-700 text-center py-2 px-6' onClick={closeModal}>
+                     Да, удалить
+                   </button>
+                   <button className=' rounded-xl bg-gray-200 text-center' onClick={closeModal}>
+                     <h1 className='mr-5 ml-4 mt-1 mb-1 text-black'>Отмена</h1>
+                   </button>
+                 </div>
+               </div>
         </div>
       )}
 

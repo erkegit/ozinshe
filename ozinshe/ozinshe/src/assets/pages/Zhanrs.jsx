@@ -75,7 +75,7 @@ function Zhanrs() {
       >
         <div className='flex gap-56 space-x-2 mb-4'>
         <h3 className="font-bold font-mono">Удалить жанр?</h3>
-        <img src={close} alt='' className='' onClick={closeModal()}/>
+        <img src={close} alt='' className='' onClick={() => closeModal()}/>
         </div>
         <hr/>
           <p className='text-center text-gray-400'>Вы действительно хотите удалить жанр?</p>
