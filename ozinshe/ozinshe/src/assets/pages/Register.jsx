@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import logo from '../imges/Your App.svg'
 import eye from "../imges/eye.svg"
 import heye from "../imges/heye.svg"
+import axios from 'axios';
 
 function Register(){
   const navigate = useNavigate();
@@ -12,11 +13,31 @@ function Register(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    navigate('/project'); // Redirect to dashboard after successful login
+  
+    axios.post('http://185.100.67.64/auth/signin', {
+      email,
+      password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Response:', response.data); // <-- Данные приходят сюда
+      const token = response.data.result;       // <-- предполагаем, что API возвращает { token: '...' }
+      if (token) {
+        localStorage.setItem('token', token);
+        navigate('/project');
+      } else {
+        alert('Токен не получен');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Неправильный логин или пароль");
+    });
   };
+  
 
   return (
     <div className="block p-16 justify-items-center bg-white">

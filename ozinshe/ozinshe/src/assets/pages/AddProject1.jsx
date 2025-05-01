@@ -67,7 +67,7 @@ function SeasonsForm() {
         onChange={(e) => handleEpisodeChange(seasonIndex, episodeIndex, e.target.value)}
         onFocus={() => handleFocus(seasonIndex, episodeIndex)}
         onBlur={() => handleBlur(seasonIndex, episodeIndex)}
-        className={`w-full border px-3 py-2 rounded-2xl outline-none transition-all bg-gray-50
+        className={`w-full h-12 border px-3 py-2 rounded-2xl outline-none transition-all bg-gray-50
           ${errors[`${seasonIndex}-${episodeIndex}`] ? 'border-red-500' : 'border-gray-50 focus:border-blue-500'}`}
       />
       <label
@@ -83,7 +83,7 @@ function SeasonsForm() {
   );
 
   return (
-    <div className="p-6 bg-gray-100 block space-y-10" style={{ borderRadius: '20px' }}>
+    <div className="p-6 bg-gray-100 w-872 block space-y-10" style={{ borderRadius: '20px' }}>
       <Helmet>
         <title>Добавить проект</title>
       </Helmet>
@@ -97,8 +97,6 @@ function SeasonsForm() {
         <button className='text-3xl bg-gray-200 pl-1 pr-1 rounded-lg' onClick={() => navigate("/project")}>←</button>
           <h1 className="font-black font-mono text-3xl">Видео</h1>
         </div>
-        
-        {/* Select для количества сезонов */}
         <div className="relative w-64 mt-4">
           <label htmlFor="seasonCount" className="block mb-2 text-gray-500">Количество сезонов</label>
           <select
@@ -121,9 +119,9 @@ function SeasonsForm() {
               <button
                 type="button"
                 onClick={() => handleDeleteEpisode(seasonIndex, episodeIndex)}
-                className="text-red-500 text-sm ml-2"
+                className="text-red-500 text-sm"
               >
-              <img src={trash} alt="Delete" />
+              <img src={trash} className='w-4' alt="Delete" />
               </button>
             </div>
             </div>)}

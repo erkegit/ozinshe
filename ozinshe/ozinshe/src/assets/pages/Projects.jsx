@@ -10,13 +10,34 @@ import pen from "../imges/pen.svg"
 import { useNavigate } from 'react-router-dom'
 import "../styles/Projects.css"
 import plus from "../imges/plus.svg"
+import axios from 'axios';
 
 function Projects() {
   const [isOpen, setIsOpen] = useState(false);
+  const [categories, setProjects] = useState([]);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false)
   const navigate = useNavigate()
+
+  const token = localStorage.getItem('token');
+
+axios.get('http://185.100.67.64/movie', {
+  headers: {
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${token}`,
+  }
+})
+.then(response => {
+  console.log('Response:', response.data); // Данные приходят сюда
+  setProjects(response.data.result); // Предполагаем, что данные находятся в response.data.result
+})
+.catch(error => {
+  console.error('Ошибка при получении данных:', error);
+});
+
+  console.log(categories)
+  
   return (
     <div className='p-6 bg-gray-100 block space-y-10' style={{borderRadius:"20px"}}>
       <Helmet>
@@ -56,7 +77,9 @@ function Projects() {
       </div> 
       <h1>Здесь скоро будеть показоно все проекты а так же проекты по вашим интересам </h1> 
       <h1>Пример:</h1>
-      <div className='block p-5 w-64 bg-white h-460 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+      <div className='flex gap-5 flex-wrap'>
+      { !token ? 
+        <div className='block p-5 w-64 bg-white h-460 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <span className='bg-black opacity-80 z-20 rounded-md absolute mt-3 ml-3 text-white  p-1'>
           Сериа
         </span>
@@ -73,6 +96,43 @@ function Projects() {
               <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
           </div>
         </div>
+      </div> : categories.map((category) => (
+        <div key={category.categoryId} className="mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {category.categoryMovies.map((movie) => (
+              <div key={movie.movieId} className='block p-5 w-64 bg-white h-460 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+                <span className='bg-black opacity-80 z-20 rounded-md absolute mt-3 ml-3 text-white  p-1'>
+          Сериа
+        </span>
+
+                <img
+                  src={`http://185.100.67.64/${movie.imageSrc}`}
+                  alt={movie.title}
+                  className="w-full h-48 object-cover rounded-md mb-2"
+                />
+                <h1 className='font-black font-mono hover:text-blue-700 cursor-default' onClick={() => navigate("/project/deital")}>{movie.title}</h1>
+                <h2 className='text-gray-400'>{category.categoryName}•{movie.genres?.map((genre, index) => (
+          <span key={genre.genreId}>
+            {genre.name}
+            {index < movie.genres.length - 1 && ', '}
+          </span>
+        ))}</h2>
+        <div className='flex gap-20 mt-24'>
+          <div className='flex gap-1 mt-8'>
+            <img src={eye} alt="" className='w-4 h-4 mt-1'/>
+            Просмотры
+          </div>
+          <div className='flex gap-5 mt-10'>
+              <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
+              <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
+          </div>
+              </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+      }
       </div>
       {isOpen && (
         <div

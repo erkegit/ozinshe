@@ -90,7 +90,7 @@ function AddProject2() {
     const ishav = scernshot && image
 
     return (
-        <div className='p-6 bg-gray-100 block space-y-10' style={{borderRadius:"20px"}}>
+        <div className='p-6 bg-gray-100 w-872 block space-y-10' style={{borderRadius:"20px"}}>
           <Helmet>
         <title>Добавить проект</title>
       </Helmet>
