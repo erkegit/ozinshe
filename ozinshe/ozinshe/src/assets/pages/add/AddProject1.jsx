@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import trash from "../imges/trash.svg"
+import trash from "../../imges/trash.svg"
 import { Helmet } from 'react-helmet';
 
 function SeasonsForm() {

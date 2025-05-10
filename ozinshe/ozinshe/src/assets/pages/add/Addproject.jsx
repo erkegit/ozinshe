@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function ProjectForm() {
+function AddProject() {
     const navigate = useNavigate();
   const [values, setValues] = useState({
     title: '',
@@ -16,7 +17,23 @@ function ProjectForm() {
     producer: '',
     director: ''
   });
-  
+  const [ageCategories, setAgeCategories] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get('http://185.100.67.64/age-category',{
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+    .then(response => {
+      setAgeCategories(response.data.result); // Предполагаем, что данные находятся в response.data.result
+    })
+    .catch(error => {
+      console.error('Ошибка при получении данных:', error);
+    })
+  },[])  
 
   const [focusedFields, setFocusedFields] = useState({});
   const [errors, setErrors] = useState({});
@@ -53,11 +70,11 @@ function ProjectForm() {
           ${errors[field] ? `border-red-500` : `border-gray-50 focus:border-blue-500`}`}
         onFocus={() => setFocusedFields({ ...focusedFields, [field]: true })}
         onBlur={() => handleBlur(field)}
-      placeholder={focusedFields[field] ? "" :label}
+      placeholder={focusedFields[field] ? "" : label}
       />
       <label
         className={`absolute left-3 top-3   transition-all duration-300 
-          ${focusedFields[field] ? '-translate-y-6 -translate-x-2 text-blue-500 text-sm bg-white' : 'text-transparent'}`}
+          ${focusedFields[field] ? '-translate-y-6 -translate-x-2 text-blue-500 text-sm bg-white' : ' absolute flex-none text-transparent'}`}
       >
         {label}
       </label>
@@ -95,7 +112,7 @@ function ProjectForm() {
       <textarea
         value={values[field]}
         onChange={(e) => handleChange(field, e.target.value)}
-        className={`w-760 border px-3 py-2 rounded-2xl outline-none transition-all bg-gray-50
+        className={`w-760 min-h-12 border px-3 py-2 rounded-2xl outline-none transition-all bg-gray-50
           ${errors[field] ? 'border-red-500' : 'border-gray-50 focus:border-blue-500'}`}
         onFocus={() => setFocusedFields({ ...focusedFields, [field]: true })}
         onBlur={() => handleBlur(field)}
@@ -134,18 +151,20 @@ function ProjectForm() {
       <div className="flex flex-wrap gap-4 mt-4">
        <div>
        <div className="flex-1">
-      {renderSelect('Тип проекта', 'projectType', ['Короткометражный', 'Полнометражный', 'Мультфильм', 'Серия'], 86)}
+      {renderSelect('Тип проекта', 'projectType', ['Короткометражный', 'Полнометражный', 'Мультфильм', 'Серия'], 96)}
         </div>
         <div className="flex-1">
-      {renderSelect('Хронометраж', 'duration', ['1мин', '2мин', '3мин', '4мин', '5мин', '6мин', '7мин', '8мин', '9мин', '10мин', '15мин', '30 мин', '60 мин', '90 мин', '120 мин'], 86)}
+      {renderSelect('Хронометраж', 'duration', ['1мин', '2мин', '3мин', '4мин', '5мин', '6мин', '7мин', '8мин', '9мин', '10мин', '15мин', '30 мин', '60 мин', '90 мин', '120 мин'], 96)}
         </div>
        </div>
         <div>
         <div className="flex-1">
-      {renderSelect('Возрастной рейтинг', 'rating', ['0+', '6+', '12+', '16+', '18+'], 86)}
+      {renderSelect('Возрастной рейтинг', 'rating', ageCategories.map((age) => (
+        age.name
+        )),84)}
         </div>
         <div className="flex-1">
-      {renderSelect('Год', 'year', ['2020', '2021', '2022', '2023', '2024'], 86)}
+      {renderSelect('Год', 'year', ['2020', '2021', '2022', '2023', '2024'], 84)}
         </div>
         </div>
       </div>
@@ -177,4 +196,4 @@ function ProjectForm() {
   );
 }
 
-export default ProjectForm;
+export default AddProject;

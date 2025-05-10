@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import close from "../imges/icon.svg"
@@ -17,6 +18,23 @@ function Roles() {
     roles:"",
   });
 
+  const token = localStorage.getItem('token');
+  const [roles, setRoles] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://185.100.67.64/role",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        setRoles(response.data.result);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      })
+  })
 
   const openModal1 = () => setIsOpen1(true);
   const closeModal1 = () => setIsOpen1(false);
@@ -106,32 +124,65 @@ function Roles() {
         </div>
         <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
-    <div className='block p-5 w-535 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
-            <h1 className='font-black font-mono text-2xl'>Менеджер 1</h1>
-            <div className='blok space-y-3 mt-3 ml-1'>
-                <div className='flex gap-2'>
-                    <span>✓</span>
-                    <h1 className='font-black font-mono text-md'>Проекты</h1>
-                    <h3 className='text-gray-300'>(Редактирование)</h3>
-                </div>
-                <div className='flex gap-2'>
-                    <span>✓</span>
-                    <h1 className='font-black font-mono text-md'>Категории</h1>
-                    <h3 className='text-gray-300'>(Только чтение)</h3>
-                </div>
-                <div className='flex gap-44'>
-                    <div className='flex gap-2'>
-                        <span>✓</span>
-                        <h1 className='font-black font-mono text-md'>Пользователи</h1>
-                        <h3 className='text-gray-300'>(Только чтение)</h3>
-                    </div> 
-                    <div className='flex gap-5 mt-1'>
-                        <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
-                        <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
-                    </div>    
-                </div>
-            </div>
+   {
+    !token ?  <div className='block p-5 w-535 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+    <h1 className='font-black font-mono text-2xl'>Менеджер 1</h1>
+    <div className='blok space-y-3 mt-3 ml-1'>
+        <div className='flex gap-2'>
+            <span>✓</span>
+            <h1 className='font-black font-mono text-md'>Проекты</h1>
+            <h3 className='text-gray-300'>(Редактирование)</h3>
+        </div>
+        <div className='flex gap-2'>
+            <span>✓</span>
+            <h1 className='font-black font-mono text-md'>Категории</h1>
+            <h3 className='text-gray-300'>(Только чтение)</h3>
+        </div>
+        <div className='flex gap-44'>
+            <div className='flex gap-2'>
+                <span>✓</span>
+                <h1 className='font-black font-mono text-md'>Пользователи</h1>
+                <h3 className='text-gray-300'>(Только чтение)</h3>
+            </div> 
+            <div className='flex gap-5 mt-1'>
+                <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
+                <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
+            </div>    
+        </div>
+    </div>
+</div>
+:
+<div className='flex flex-wrap gap-6'>
+  {roles?.map((role) => (
+    <div key={role.id} className='block p-5 w-535 bg-white h-auto hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+      <h1 className='font-black font-mono text-2xl'>{role.name}</h1>
+      <div className='blok space-y-3 mt-3 ml-1'>
+        <div className='flex gap-2'>
+          <span>✓</span>
+          <h1 className='font-black font-mono text-md'>Проекты</h1>
+          <h3 className='text-gray-300'>{"("}{role.isAbleToManageMovies ? "Редактирование" : "Только чтение"}{")"}</h3>
+        </div>
+        <div className='flex gap-2'>
+          <span>✓</span>
+          <h1 className='font-black font-mono text-md'>Категории</h1>
+          <h3 className='text-gray-300'>{"("}{role.isAbleToManageCategory ? "Редактирование" : "Только чтение"}{")"}</h3>
+        </div>
+        <div className='flex gap-44'>
+          <div className='flex gap-2'>
+            <span>✓</span>
+            <h1 className='font-black font-mono text-md'>Пользователи</h1>
+            <h3 className='text-gray-300'>{"("}{role.isAbleToManageUser ? "Редактирование" : "Только чтение"}{")"}</h3>
+          </div> 
+          <div className='flex gap-5 mt-1'>
+            <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
+            <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
+          </div>    
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+   }
       {isOpen && (
         <div
           onClick={closeModal}

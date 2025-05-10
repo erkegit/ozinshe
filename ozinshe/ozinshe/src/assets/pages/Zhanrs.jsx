@@ -1,5 +1,6 @@
-import React,{useState, useRef} from 'react'
+import React,{useState, useRef, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import upolad from "../imges/upolad.jpg"
@@ -30,6 +31,7 @@ function Zhanrs() {
     {id: 8, viwes:21, img: rc1, name: 'Музыкалық'},
     {id: 9, viwes:21, img: rc2, name: 'Спорттыық'},
   ])
+  const [genres, setGenres] = useState(null)
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
   const openModal = () => setIsOpen(true);
@@ -51,7 +53,24 @@ function Zhanrs() {
       img: "",
     })
   
-    
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+      axios.get("http://185.100.67.64/genre", 
+        {
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        setGenres(response.data.result);
+        console.log(response.data.result)
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    })
   
     const [image, setImage] = useState("");
     const handleDrop = (e) => {
@@ -142,13 +161,13 @@ function Zhanrs() {
     <div className='flex gap-96'>
      <div className='flex mr-20'>
        <h1 className='font-black text-3xl'>Жанры</h1>
-       <span className='ml-2 mt-3'>{zhanrs.length}</span>
+       <span className='ml-2 mt-3'>{!token ? zhanrs.length : genres?.length}</span>
      </div>
      <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
      </div>
  <div className='flex flex-wrap gap-5'>
  {
- zhanrs && zhanrs.map(zhanr => (
+ !token ? ( zhanrs.map(zhanr => (
   <div key={zhanr.id} className='space-y-4 block p-5 w-60 bg-white h-60  hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
   <img src={zhanr.img} alt="" className='rounded-lg'/>
   <h1 className='font-black font-mono'>{zhanr.name}</h1>
@@ -164,6 +183,24 @@ function Zhanrs() {
    </div>
 </div>
  ))
+) : (
+  genres?.map(zhanr => (
+    <div key={zhanr.id} className='space-y-4 block p-5 w-52 bg-white h-auto  hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+    <img src={`http://185.100.67.64/${zhanr.imageSrc}`} alt="" className='rounded-lg'/>
+    <h1 className='font-black font-mono'>{zhanr.name}</h1>
+    <div className='flex gap-28'>
+       <div className='flex gap-1'>
+         <img src={camera} alt="" className='w-4 h-4 mt-1'/>
+         <h1 className="text-gray-500 text-sm">{zhanr.countOfMovies}</h1>
+       </div>
+       <div className='flex gap-5'>
+           <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
+           <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
+       </div>
+     </div>
+  </div>
+  ))
+)
  }
  </div>
  {isOpen && (

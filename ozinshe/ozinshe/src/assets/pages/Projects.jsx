@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Helmet } from 'react-helmet'
 import arrdown from "../imges/arrdown.svg"
 import clock from "../imges/Clock.svg";
@@ -10,11 +10,13 @@ import pen from "../imges/pen.svg"
 import { useNavigate } from 'react-router-dom'
 import "../styles/Projects.css"
 import plus from "../imges/plus.svg"
-import axios from 'axios';
+import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 function Projects() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setProjects] = useState([]);
+  const [length, setLength] = useState(0)
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false)
@@ -22,21 +24,20 @@ function Projects() {
 
   const token = localStorage.getItem('token');
 
-axios.get('http://185.100.67.64/movie', {
-  headers: {
-    'Accept': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  }
-})
-.then(response => {
-  console.log('Response:', response.data); // Данные приходят сюда
-  setProjects(response.data.result); // Предполагаем, что данные находятся в response.data.result
-})
-.catch(error => {
-  console.error('Ошибка при получении данных:', error);
-});
-
-  console.log(categories)
+  useEffect(() => {
+    axios.get('http://185.100.67.64/movie', {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+    .then(response => {
+      setProjects(response.data.result); // Предполагаем, что данные находятся в response.data.result
+    })
+    .catch(error => {
+      console.error('Ошибка при получении данных:', error);
+    });
+  })
   
   return (
     <div className='p-6 bg-gray-100 block space-y-10' style={{borderRadius:"20px"}}>
@@ -46,7 +47,7 @@ axios.get('http://185.100.67.64/movie', {
       <div className='flex gap-96'>
         <div className='flex mr-10'>
           <h1 className='font-black text-3xl'>Проекты</h1>
-          <span className='ml-2 mt-3'>113</span>
+          <span className='ml-2 mt-3'>13</span>
         </div>
         <button className='add ml-96' onClick={() => navigate("/project/add/step1")}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
@@ -75,8 +76,6 @@ axios.get('http://185.100.67.64/movie', {
           </div>
          </div>
       </div> 
-      <h1>Здесь скоро будеть показоно все проекты а так же проекты по вашим интересам </h1> 
-      <h1>Пример:</h1>
       <div className='flex gap-5 flex-wrap'>
       { !token ? 
         <div className='block p-5 w-64 bg-white h-460 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
@@ -84,7 +83,7 @@ axios.get('http://185.100.67.64/movie', {
           Сериа
         </span>
         <img src={img} alt="" />
-        <h1 className='font-black font-mono hover:text-blue-700 cursor-default' onClick={() => navigate("/project/deital")}>Название проекта</h1>
+        <h1 className='font-black font-mono hover:text-blue-700 cursor-default' onClick={() => navigate("/project/deital/")}>Название проекта</h1>
         <h2 className='text-gray-400'>Категория•Тип</h2>
         <div className='flex gap-20'>
           <div className='flex gap-1 mt-8'>
@@ -100,17 +99,17 @@ axios.get('http://185.100.67.64/movie', {
         <div key={category.categoryId} className="mb-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {category.categoryMovies.map((movie) => (
+           
               <div key={movie.movieId} className='block p-5 w-64 bg-white h-460 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
                 <span className='bg-black opacity-80 z-20 rounded-md absolute mt-3 ml-3 text-white  p-1'>
           Сериа
         </span>
-
                 <img
                   src={`http://185.100.67.64/${movie.imageSrc}`}
                   alt={movie.title}
                   className="w-full h-48 object-cover rounded-md mb-2"
                 />
-                <h1 className='font-black font-mono hover:text-blue-700 cursor-default' onClick={() => navigate("/project/deital")}>{movie.title}</h1>
+                <Link className='font-black font-mono hover:text-blue-700 cursor-default' to={`/project/deital/${movie.movieId}`}>{movie.title}</Link>
                 <h2 className='text-gray-400'>{category.categoryName}•{movie.genres?.map((genre, index) => (
           <span key={genre.genreId}>
             {genre.name}
@@ -123,14 +122,16 @@ axios.get('http://185.100.67.64/movie', {
             Просмотры
           </div>
           <div className='flex gap-5 mt-10'>
-              <img src={pen} alt="" className='w-4 h-4 ' onClick={() => alert("Редактирование не доступно")}/>
+              <img src={pen} alt="" className='w-4 h-4 ' onClick={() => navigate(`/project/edit/step1/${movie.movieId}`)}/>
               <img src={trash} alt="" className='w-4 h-4 ' onClick={openModal}/>
           </div>
+          
               </div>
               </div>
             ))}
           </div>
         </div>
+        
       ))
       }
       </div>

@@ -1,5 +1,6 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import img from "../imges/image2.png"
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
@@ -13,6 +14,7 @@ function ProjectsMain() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
   const fileInputRef = useRef(null); // Реф для скрытого инпута
+  const [main , setMain] = useState(null);
   const [values, setValues] = useState({
     title: '',
     queue: '',
@@ -46,6 +48,23 @@ function ProjectsMain() {
       reader.readAsDataURL(file);
     }
   };
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    axios.get("", {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      setMain(response.data.result);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  })
 
   const openModal1 = () => setIsOpen1(true);
   const closeModal1 = () => setIsOpen1(false);
@@ -112,7 +131,7 @@ function ProjectsMain() {
         </div>
         <button className='add ml-80' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
-         <div className='block p-5 w-506 bg-white h-96 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+        <div className='block p-5 w-506 bg-white h-96 hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <img src={img} alt="" className='w-506 h-60'/>
         <h1 className='font-black font-mono'>Название проекта</h1>
         <h2 className='text-gray-400'>Категория•Тип</h2>

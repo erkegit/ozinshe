@@ -1,5 +1,6 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 import trash from "../imges/trash.svg"
 import pen from "../imges/pen.svg"
 import upolad from "../imges/upolad.jpg"
@@ -47,7 +48,23 @@ const fileInputRef = useRef(null);
     img: "",
   })
 
-  
+  const [ageCategory, setAgeCategory] = useState(null);
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    axios.get('http://185.100.67.64/age-category', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      setAgeCategory(response.data.result);
+    })
+    .catch((error) => {
+      console.error('Error fetching age categories:', error);
+    });
+  })
 
   const [image, setImage] = useState(null);
   const handleDrop = (e) => {
@@ -80,7 +97,7 @@ const fileInputRef = useRef(null);
   };
 
 
-  const [focusedFields, setFocusedFields] = useState({});
+  const [focusedFields, setFocusedFields] = useState(null);
   const [errors, setErrors] = useState({});
 
   const handleBlur = (field) => {
@@ -138,14 +155,14 @@ return (
     <div className='flex gap-96'>
      <div className='flex mr-20'>
        <h1 className='font-black text-3xl'>Возрасты</h1>
-       <span className='ml-2 mt-3'>{ages.length}</span>
+       <span className='ml-2 mt-3'>{!token ? ages.length : ageCategory?.length}</span>
      </div>
      <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
    </div>
  <div className='flex flex-wrap gap-5'>
  
   {
-     ages.map(age => (
+     !token ? (ages.map(age => (
       <div key={age.id} className='block p-5 w-60 bg-white h-auto  hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
         <img src={age.img} alt="" className='mb-2'/>
   <h1 className='font-black font-mono '>
@@ -163,6 +180,26 @@ return (
    </div>
 </div>
     ))
+  ) : (
+    ageCategory?.map(age => (
+      <div key={age.ageCategoryId} className='block p-5 w-60 bg-white h-auto  hover:shadow-gray-300 hover:shadow-sm hover:scale-105 duration-200' style={{borderRadius:"16px"}}>
+        <img src={`http://185.100.67.64/${age.imageSrc}`} alt="" className='mb-2'/>
+  <h1 className='font-black font-mono '>
+    {age.name} жас
+  </h1>
+  <div className='flex gap-32 mt-4'>
+     <div className='flex gap-1'>
+       <img src={camera} alt="" className='w-4 h-4 mt-1'/>
+       <h1 className="text-gray-500 text-sm">{age.countOfMovies}</h1>
+     </div>
+     <div className='flex gap-5'>
+         <img src={pen} alt="" className='w-4 h-4 '/>
+         <img src={trash} alt="" className='w-4 h-4 ' onClick={() => openModal()}/>
+     </div>
+   </div>
+</div>
+    ))
+  )
   }
  </div>
  {isOpen && (

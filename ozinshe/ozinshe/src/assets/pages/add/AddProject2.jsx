@@ -1,8 +1,8 @@
 import React, {useState, useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
-import upolad from "../imges/upolad.jpg"
-import trash from "../imges/trash.svg"
-import checked from "../imges/Duotone.jpg"
+import upolad from "../../imges/upolad.jpg"
+import trash from "../../imges/trash.svg"
+import checked from "../../imges/Duotone.jpg"
 import { Helmet } from 'react-helmet';
 
 function AddProject2() {

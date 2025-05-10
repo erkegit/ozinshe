@@ -47,7 +47,7 @@ function Navbar() {
 
   return (
     <div className="w-64">
-    <div className=" inline-flex flex-col items-start">
+    <div className=" inline-flex flex-col items-start" key={false}>
         {menuItems.map((item) => (
          <div style={{padding: "16px 48px 16px 0px"}}>
            <div

@@ -9,7 +9,7 @@ function Layout() {
         <Header />
      <div className='flex gap-5'>
         <Navbar/>
-        <div className='mb-10 w-1200'>
+        <div className='mb-10 z-0 w-1200'>
         <Outlet></Outlet>
         </div>
     </div>

@@ -11,6 +11,7 @@ function Register(){
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
   
@@ -23,8 +24,8 @@ function Register(){
       }
     })
     .then(response => {
-      console.log('Response:', response.data); // <-- Данные приходят сюда
-      const token = response.data.result;       // <-- предполагаем, что API возвращает { token: '...' }
+      console.log('Response:', response.data); 
+      const token = response.data.result;       
       if (token) {
         localStorage.setItem('token', token);
         navigate('/project');
@@ -37,7 +38,25 @@ function Register(){
       alert("Неправильный логин или пароль");
     });
   };
-  
+
+  const pemail = () => {
+   const prmt =  prompt("Введите почту для восстановления пароля")
+    axios.post('http://185.100.67.64/auth/forgot-password', {
+      prmt
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log('Response:', response.data); // <-- Данные приходят сюда
+      alert("Проверьте почту для восстановления пароля. новый пароль придёт от nurzat.tynyshbekov.04@gmail.com")
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Ошибка при восстановлении пароля");
+    });
+  }  
 
   return (
     <div className="block p-16 justify-items-center bg-white">
@@ -99,7 +118,7 @@ function Register(){
         </form>
         <p className="text-center text-gray-500 mt-4">
           Забыли пароль?{' '}
-          <a href="#" className="text-blue-500 font-bold hover:underline">
+          <a href="#" className="text-blue-500 font-bold hover:underline" onClick={() => pemail()}>
             Восстановить
           </a>
         </p>
