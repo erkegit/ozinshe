@@ -120,7 +120,9 @@ function Roles() {
        <div className='flex gap-96'>
         <div className='flex mr-20'>
           <h1 className='font-black text-3xl'>Роли</h1>
-          <span className='ml-2 mt-3'>3</span>
+          <span className='ml-2 mt-3'>
+            {!token ? 3 : roles?.length}
+          </span>
         </div>
         <button className='add ml-96' onClick={openModal1}> <img src={plus} alt="" /> <h1>Добавить</h1></button>
       </div>
